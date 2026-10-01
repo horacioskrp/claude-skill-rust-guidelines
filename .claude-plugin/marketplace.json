@@ -1,0 +1,14 @@
+{
+  "name": "horacioskrp-skills",
+  "owner": {
+    "name": "horacioskrp",
+    "url": "https://github.com/horacioskrp"
+  },
+  "plugins": [
+    {
+      "name": "rust-guidelines",
+      "source": "./",
+      "description": "Microsoft's Pragmatic Rust Guidelines (90 rules) as a Claude Code skill."
+    }
+  ]
+}

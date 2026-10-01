@@ -1,0 +1,41 @@
+name: Sync upstream guidelines
+
+# Keeps the bundled guidelines in sync with microsoft/rust-guidelines.
+# Runs weekly and on demand; commits to main only when the content changed.
+
+on:
+  schedule:
+    - cron: "0 6 * * 1" # every Monday 06:00 UTC
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    env:
+      UPSTREAM: https://raw.githubusercontent.com/microsoft/rust-guidelines/main
+      DEST: skills/rust-guidelines/reference
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Fetch upstream files
+        run: |
+          set -euo pipefail
+          curl -fsSL "$UPSTREAM/src/agents/all.txt"                 -o "$DEST/guidelines-full.txt"
+          curl -fsSL "$UPSTREAM/src/guidelines/checklist/README.md" -o "$DEST/checklist.md"
+
+      - name: Commit if changed
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- "$DEST"; then
+            echo "No upstream changes."
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$DEST"
+          git commit -m "chore: sync guidelines from microsoft/rust-guidelines upstream"
+          git push

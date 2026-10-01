@@ -1,0 +1,13 @@
+{
+  "name": "rust-guidelines",
+  "version": "1.0.0",
+  "description": "Packages Microsoft's Pragmatic Rust Guidelines (90 design rules) as a skill so Claude applies them when writing or reviewing Rust.",
+  "author": {
+    "name": "horacioskrp",
+    "url": "https://github.com/horacioskrp"
+  },
+  "homepage": "https://github.com/horacioskrp/claude-skill-rust-guidelines",
+  "repository": "https://github.com/horacioskrp/claude-skill-rust-guidelines",
+  "license": "MIT",
+  "keywords": ["rust", "guidelines", "code-review", "idiomatic", "api-design"]
+}
